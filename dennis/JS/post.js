@@ -1,5 +1,5 @@
-const urlRaiz = "https://dry-plateau-16443.herokuapp.com";
-//const urlRaiz = "http://localhost:3000";
+//const urlRaiz = "https://dry-plateau-16443.herokuapp.com";
+const urlRaiz = "http://localhost:3000";
 
 const url = `${urlRaiz}/api/v1/products`;
 const urlUpload = `${urlRaiz}/api/v1/products/upload`;
@@ -121,6 +121,7 @@ async function subirImagen() {
 }
   await createProduct();
 
+  //con este bloque estamos subiendo la imagen al backend
   const res = await fetch(urlUpload, {
     method: 'POST',
     body: formData

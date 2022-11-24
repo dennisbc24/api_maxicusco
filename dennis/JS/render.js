@@ -1,6 +1,6 @@
 const telefonoParaContacto = 915355802;
-//const urlRaiz = "http://localhost:3000";
-const urlRaiz = "https://dry-plateau-16443.herokuapp.com";
+const urlRaiz = "http://localhost:3000";
+//const urlRaiz = "https://dry-plateau-16443.herokuapp.com";
 
 const url = `${urlRaiz}/api/v1/products`;
   const masonryLayout = (containerElem,itemsElems,columns) => {

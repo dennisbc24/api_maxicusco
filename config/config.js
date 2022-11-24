@@ -9,6 +9,12 @@ const config = {
     dbHost: process.env.DB_HOST,
     dbName: process.env.DB_NAME,
     dbPort: process.env.DB_PORT,
+
+    //aws
+    awsRegion: process.env.AWS_REGION,
+    awsId: process.env.AWS_ACCESS_KEY,
+    awsClave: process.env.AWS_SECRET_KEY,
+    awsName: process.env.AWS_BUCKET_NAME
 }
 
 module.exports = { config };

@@ -1,5 +1,6 @@
 const express = require('express');
 //libreria para subir archivos
+const fileUpload = require('express-fileupload')
 const multer = require('multer');
 const cors = require('cors');
 const app = express();
@@ -8,6 +9,12 @@ const port = process.env.PORT || 3000;
 
 const {logError,errorHandler, errorBoomHandler} = require('./middlewares/error.handler')
 //donde va a encontrar los archivos estaticos
+app.use(fileUpload({
+    //esto es para que los archivos se guarden en una carpeta temporal del proyecto
+    useTempFiles: true,
+    tempFileDir: './uploads',
+    debug:true
+}));
 app.use(express.static('dennis'));
 //aqui se ejecuta todos los routers
 
@@ -43,11 +50,11 @@ const storage = multer.diskStorage({
 const publicPath = __dirname;
 const direccion = `${publicPath}/dennis/images`
 console.log(direccion);
-app.use(multer({
+/* app.use(multer({
     storage: storage,
     dest: './dennis/images',
     fileSize: 50000000 // 50MB
-}).single('foto'));
+}).single('foto')); */
 
 routerApi(app);
 

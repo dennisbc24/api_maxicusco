@@ -1,4 +1,10 @@
 const express = require('express');
+const fileUpload = require('express-fileupload')
+const {uploadFile, getFile} = require('../helpers/aws')
+//estos 2 son para subir a aws
+const {upload} = require('../controllers/upload.controller');
+const {verifyFile} = require('../middlewares/verifyFile')
+
 const router = express.Router();
 //modulo para eliminar archivos de backend
 const { unlink } = require('fs-extra')
@@ -21,6 +27,8 @@ const service = new ProductService();
  */
 
 //mongo
+
+
 router.get('/', async(req, res) => {
   try {
     const arrayProductDB = await Product.find()
@@ -28,6 +36,21 @@ router.get('/', async(req, res) => {
   } catch (err) {
     console.log(err);
   }
+})
+
+router.post('/files', async (req,res)=> {
+  const imagen = req.files.file
+  await uploadFile(imagen);
+  console.log(imagen);
+  res.json({message: 'archivo subido'})
+})
+
+router.get('/files/:fileName', async (req,res)=> {
+  const result = await getFile(req.params.fileName)
+  res.json(result.$metadata)
+  
+  
+  res.json({message: 'archivo recibido'})
 })
 
 router.get('/:id', schemaHandler(getProductSchema, 'params'), async (req, res, next) => {
@@ -68,11 +91,16 @@ router.post('/', schemaHandler(createProductSchema, 'body'), async (req, res, ne
     next(e)
   }})
 
-router.post('/upload', (req, res) => {
-  console.log(req.file);
-  res.render('index');
+router.post('/upload', (req,res)=> {
+  console.log(req.files)
+  res.json({message: 'archivo subido'})
+}
+  //verifyFile,upload 
+  //(req, res) => {
+  //console.log(req.file);
+  //res.render('index');}
+)
 
-})
 
 router.patch('/:id',
 schemaHandler(getProductSchema, 'params'),

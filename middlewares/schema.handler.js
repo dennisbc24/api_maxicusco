@@ -1,4 +1,5 @@
-const boom = require('@hapi/boom');
+
+const boom = require('@hapi/boom')
 
 function schemaHandler(schema, property) {
     //clousure
