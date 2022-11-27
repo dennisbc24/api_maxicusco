@@ -5,7 +5,7 @@ const multer = require('multer');
 const cors = require('cors');
 const app = express();
 const path = require('path');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 const {logError,errorHandler, errorBoomHandler} = require('./middlewares/error.handler')
 //donde va a encontrar los archivos estaticos
