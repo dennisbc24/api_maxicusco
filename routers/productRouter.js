@@ -38,11 +38,25 @@ router.get('/', async(req, res) => {
   }
 })
 
-router.post('/files', async (req,res)=> {
-  const imagen = req.files.file
-  await uploadFile(imagen);
+router.post('/files', schemaHandler(createProductSchema, 'datos'),
+async (req,res)=> {
+
+  try {
+    const imagen = req.files.file
+  const datos = JSON.parse(req.body.datos)
   console.log(imagen);
+  await uploadFile(imagen);
+  const arrayProductDB = Product.create(datos)
+  
+  //res.json(arrayProductDB);
+  
+  //console.log(imagen);
   res.json({message: 'archivo subido'})
+  } 
+    catch(e){
+      next(e)
+  }
+  
 })
 
 router.get('/files/:fileName', async (req,res)=> {
@@ -81,9 +95,11 @@ router.get('/filter', (req,res) => {
     }}) */
 
     //mongoBD
-router.post('/', schemaHandler(createProductSchema, 'body'), async (req, res, next) => {
+router.post('/', schemaHandler(createProductSchema, 'body'), 
+            async (req, res, next) => {
   try {
     //const arrayProductDB = await service.create(req.body);
+    console.log(req.body);
     const arrayProductDB = Product.create(req.body)
     res.json(arrayProductDB);
 

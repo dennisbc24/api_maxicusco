@@ -23,7 +23,7 @@ async function uploadFile(file){
     console.log(stream);
     const uploadParams = {
         Bucket: bucketName,
-        Key: file.name,
+        Key: `images/${file.name}`, 
         Body: stream
     }
     const command = new PutObjectCommand(uploadParams)
