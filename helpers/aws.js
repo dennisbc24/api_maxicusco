@@ -6,6 +6,7 @@ const { config } = require('../config/config');
 const region1 = config.awsRegion;
 const accesKeyId1 = config.awsId;
 const secretAccessKey1 = config.awsClave;
+//const bucketName = "maxicusco.net"
 const bucketName = config.awsName;
 
 const clientS3 = new S3Client({
